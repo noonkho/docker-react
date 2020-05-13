@@ -1,10 +1,5 @@
 language: generic
 
-sudo: required
-root:
-    dist: xenial
-    os: linux
-
 services:
     - docker
 
@@ -14,6 +9,7 @@ before_install:
 script:
     - docker run -e CI=true echingkho/docker-react npm run test
 
+before_deploy: "echo 'ready?'"
 deploy:
     provider: elasticbeanstalk
     region: "us-east-1"
@@ -22,7 +18,8 @@ deploy:
     bucket: "elasticbeanstalk-us-east-1-600837116870"
     bucket_path: "docker"
     access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
+    secret_access_key: 
+        secure: "Encypted $AWS_SECRET_KEY"
     on:
         branch: master
         
