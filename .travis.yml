@@ -12,13 +12,14 @@ script:
 before_deploy: "echo 'ready?'"
 deploy:
     provider: elasticbeanstalk
+    edge: true
     region: "us-east-1"
     app: "docker"
     env: "Docker-env"
     bucket: "elasticbeanstalk-us-east-1-600837116870"
     bucket_path: "docker"
     access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: "Encypted $AWS_SECRET_KEY"
+    secret_access_key: $AWS_SECRET_KEY
     on:
         branch: master
         
